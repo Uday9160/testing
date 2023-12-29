@@ -347,3 +347,102 @@ This overview provides a step-by-step explanation of how JavaScript code is exec
   Differentiates between the scope chain (organization of variables based on code structure) and the call stack (order of function calls during execution).
   #SUMMARY
   ![Alt text](./images/image-13.png)
+
+# HOISTING
+
+- Hoisting: makes some types of variables accessible/usable in the code before they are actually declared. In other words, variables are "lifted" to the top of their scope. Behind the scenes, what actually happens is that, before execution, the code is scanned for variable declarations and for each variable a new property is created in the variable environment object
+- The practical implementations of hoisting is that you can use a variable in the code BEFORE it is actually declared! The value associated with the hoisted variables also varies - refer the table below.
+
+![Alt text](<images/Screenshot (129).png>)
+
+- function declarations are hoisted - this means that these types of functions can be used/called before they are declared.
+- Variables declared with var are also hoisted, but the hoisting works differently when compared to functions in the sense that the variables are hoisted, but their value is undefined and not the value that they are declared with.
+- let and const variables are not hoisted. Hence these variables cannot be used before they are declared. TDZ stands for the Temporal Dead Zone, which is indicating the region in the code where the variable is in-scope but cannot be used because it has not been declared yet.
+- For function expressions and arrow functions, the hoisting depends on whether they were created using var, const, or let. What this means is that function expressions and arrow functions declared with a var is hoisted, but to undefined. But if they have been declared using let or const, the functions are not usable before they have been declared in the code - because of the TDZ.
+- There is one another difference between variables declared with a var and let/ const - the variables declared with var are added as properties to the global window object in JS, whereas the variables declared with let/const are not.
+
+![Alt text](<images/Screenshot (130).png>)
+
+# Hoisting Examples
+
+## Example 1: Hoisting with Function Declarations
+
+```javascript
+calculateAge(1990); // This works even though the function is called before declaration
+function calculateAge(year) {
+  console.log(2023 - year);
+}
+### Explanation: The function declaration is hoisted, so it's usable before its actual declaration.
+```
+
+## Example 2: Hoisting with Var Variables
+
+```javascript
+console.log(job); // Outputs undefined, not an error
+var job = "developer";
+console.log(job); // Outputs 'developer'
+```
+
+### Explanation: Hoisting with var sets the variable to undefined before its declaration.
+
+## Example 3: Hoisting with Let and const and TDZ
+
+```javascript
+// console.log(age); // ReferenceError: Cannot access 'age' before initialization
+let age = 30;
+### Explanation: Accessing the variable before its declaration in the Temporal Dead Zone (TDZ) leads to an error.
+
+if (true) {
+// console.log(city); // ReferenceError: Cannot access 'city' before initialization
+const city = "New York";
+console.log(city); // Outputs 'New York'
+}
+### Explanation: Const variables have a Temporal Dead Zone (TDZ) and cant be accessed before their declaration.
+```
+
+## Example 4: Hoisting with Function Expressions
+
+```javascript
+// console.log(add); // Outputs undefined because of Var, not an error
+var add = function (a, b) {
+return a + b;
+};
+console.log(add(2, 3)); // Outputs 5
+
+### Explanation: The variable 'add' is hoisted and set to undefined before its declared
+
+console.log(add3); // Outputs error because of let Uncaught ReferenceError: add3 is not defined
+let add3 = function (a, b) {
+return a + b;
+};
+console.log(add3(2, 3)); // Outputs 5
+### Explanation: The variable 'add3' is hoisted in TDZ
+
+```
+
+## Example 5: Hoisting with Arrow Functions
+
+```javascript
+console.log(multiply1); // ReferenceError: Cannot access 'multiply' before initialization becuase of let
+console.log(multiply2); // undefined because of var
+
+let multiply1 = (a, b) => a _ b;
+var multiply2 = (a, b) => a _ b;
+
+console.log(multiply1(4, 5)); // Outputs 20
+console.log(multiply2(4, 5)); // Outputs 20
+```
+
+### Explanation: Arrow functions, like other variables declared with let, have a TDZ.
+
+## Conclusion:
+
+### Function Declarations: Hoisted and can be used before declaration.
+
+### Var Variables: Hoisted and initialized with undefined.
+
+### Let and Const Variables: Hoisted but in the Temporal Dead Zone (TDZ), resulting in an error if accessed before declaration.
+
+### Function Expressions and Arrow Functions: Hoisted like variables and can cause a undefined reference if accessed before declaration.
+
+[Title](images/hoisting.js)
