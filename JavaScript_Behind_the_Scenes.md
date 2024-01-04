@@ -1,9 +1,8 @@
 # Understanding JavaScript: Key Concepts Overview
 
-## 1. High-Level, Object-Oriented, Multi-Paradigm Language:
+## 1. High-Level:
 
 JavaScript is considered a high-level programming language. In contrast to low-level languages like C, high-level languages provide abstractions that simplify programming by handling details like memory management.
-JavaScript is also described as object-oriented, meaning it utilizes objects to structure code, and it supports multiple programming paradigms, including procedural, object-oriented, and functional programming.
 
 ## 2. Garbage Collection:
 
@@ -46,8 +45,6 @@ JavaScript operates in a single thread, meaning it can execute only one operatio
 This involves executing long-running tasks asynchronously, allowing the program to continue processing other tasks. This is crucial for creating responsive and efficient web applications.
 ![Monster Defination](./images/image.png)
 
-In summary, the lecture provides a comprehensive overview of JavaScript's fundamental characteristics, from being a high-level, multi-paradigm language to its dynamic typing and unique approaches to object-oriented programming and concurrency.
-The concepts introduced in this overview lay the groundwork for a deeper understanding of JavaScript programming throughout the course.
 
 # Deeper Dive into JavaScript Engine and Runtime
 
