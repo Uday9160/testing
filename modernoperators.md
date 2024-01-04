@@ -766,3 +766,415 @@ The information is then logged to the console in a formatted string.
 Object.keys, Object.values, and Object.entries:
 
 These methods provide a way to work with object properties as if they were arrays, making it easier to perform operations like looping.
+
+# SETS
+
+## 1. Introduction of Sets in JavaScript:
+
+Sets are introduced as a new data structure in ECMAScript, specifically designed to store collections of unique values. Unlike arrays, sets do not allow duplicate values.
+
+Example:
+
+```javascript
+// Creating a set named 'ordersSet' with unique values
+const ordersSet = new Set([
+  "pasta",
+  "pizza",
+  "pizza",
+  "risotto",
+  "pasta",
+  "pizza",
+]);
+console.log(ordersSet); // Output: Set { 'pasta', 'pizza', 'risotto' }
+```
+
+In this example, the set ordersSet is created using the new Set constructor with an iterable (an array) containing some duplicate values. The resulting set only contains unique values.
+
+## 2. Comparison with Arrays:
+
+Sets are compared to arrays, emphasizing their similarity in appearance but highlighting key differences: uniqueness of elements and the lack of significance in the order of elements.
+
+Example:
+
+```javascript
+// Creating a set and an array with duplicate values
+const setExample = new Set(["a", "b", "a", "c"]);
+const arrayExample = ["a", "b", "a", "c"];
+
+console.log(setExample); // Output: Set { 'a', 'b', 'c' }
+console.log(arrayExample); // Output: [ 'a', 'b', 'a', 'c' ]
+```
+
+Here, the set setExample and the array arrayExample are created with duplicate values. The set automatically removes duplicates, while the array retains them.
+
+## 3. Set Methods and Properties:
+
+### a. Size Property:
+
+Sets have a size property, which returns the number of unique elements in the set.
+
+Example:
+
+```javascript
+console.log(ordersSet.size); // Output: 3
+```
+
+The size property is used to determine the number of unique values in the ordersSet set.
+
+### b. has Method:
+
+The has method checks if a specific element is present in the set, returning a boolean.
+
+Example:
+
+```javascript
+console.log(ordersSet.has("pizza")); // Output: true
+console.log(ordersSet.has("bread")); // Output: false
+```
+
+The has method is used to check if 'pizza' and 'bread' are present in the ordersSet set.
+
+### c. add Method:
+
+The add method adds new elements to the set, ensuring uniqueness.
+
+Example:
+
+```javascript
+ordersSet.add("garlic bread");
+ordersSet.add("garlic bread"); // Duplicate, won't be added
+
+console.log(ordersSet); // Output: Set { 'pasta', 'pizza', 'risotto', 'garlic bread' }
+```
+
+The add method is used to add 'garlic bread' to the set, and the duplicate is ignored.
+
+### d. delete Method:
+
+The delete method removes specific elements from the set.
+
+Example:
+
+```javascript
+ordersSet.delete("risotto");
+console.log(ordersSet); // Output: Set { 'pasta', 'pizza', 'garlic bread' }
+```
+
+The delete method is used to remove 'risotto' from the ordersSet set.
+
+### e. clear Method:
+
+The clear method removes all elements from the set.
+
+Example:
+
+```javascript
+ordersSet.clear();
+
+console.log(ordersSet); // Output: Set {}
+```
+
+The clear method is used to clear all elements from the ordersSet set.
+
+## 4. Iterating Over Sets:
+
+Sets are iterables, meaning they can be looped over using constructs like for...of.
+
+Example:
+
+```javascript
+for (const order of ordersSet) {
+  console.log(order);
+}
+// Output:
+// pasta
+// pizza
+// garlic bread
+```
+
+The for...of loop is used to iterate over the elements in the ordersSet set.
+
+## 5. Practical Use Case: Removing Duplicates from Arrays:
+
+A practical use case for sets is presented, demonstrating how sets can be used to remove duplicate values from an array.
+
+Example:
+
+```javascript
+const staff = ["waiter", "chef", "waiter", "manager", "chef", "waiter"];
+const staffUnique = [...new Set(staff)];
+
+console.log(staffUnique);
+// Output: [ 'waiter', 'chef', 'manager' ]
+```
+
+The staff array contains duplicate values. By converting it to a set and then back to an array, duplicates are automatically removed.
+
+## 6. Conclusion:
+
+Sets are concluded to be useful for working with unique values, but arrays are emphasized for storing ordered data and manipulation using array methods.
+
+Example:
+
+```javascript
+const uniqueLetters = new Set('Jonathan').size;
+console.log(uniqueLetters); // Output: 7
+Here, a set is used to count the unique letters in the string 'Jonathan'.
+```
+
+# MAPS
+
+## 1. Introduction to Maps:
+
+Maps are presented as a more versatile data structure than Sets. Unlike real-world maps for navigation, in JavaScript, Maps are used to associate values with keys, storing data in key-value pairs.
+
+## 2. Key Differences Between Objects and Maps:
+
+Maps are compared to objects, emphasizing a key distinction. While objects in JavaScript have keys that are always strings, Maps allow keys of any type, including objects, arrays, or other maps.
+
+## 3. Creating and Populating a Map:
+
+A restaurant map (rest) is created using the Map constructor, and entries are added using the set method. The keys and values can be of any data type.
+
+Example:
+
+```javascript
+const rest = new Map();
+
+rest
+  .set("name", "Classico Italiano")
+  .set(1, "Firenze, Italy")
+  .set(2, "Lisbon, Portugal")
+  .set("categories", ["Italian", "Pizzeria", "Vegetarian"])
+  .set("open", 11)
+  .set("close", 23)
+  .set(true, "We are open")
+  .set(false, "We are closed");
+```
+
+## 4. Chaining Set Method:
+
+The set method is demonstrated to return the updated map, enabling method chaining. Categories are added as an array, followed by open and close times.
+
+Example:
+
+```javascript
+rest.set('categories', ['Italian', 'Pizzeria', 'Vegetarian'])
+.set('open', 11)
+.set('close', 23); 5. Retrieving Data from a Map:
+```
+
+The get method is introduced to retrieve values based on keys. Retrieving data is showcased using various keys, including Booleans and numbers.
+
+Example:
+
+```javascript
+console.log(rest.get("open")); // Output: 11
+console.log(rest.get(true)); // Output: 'We are open'
+```
+
+## 6. Dynamic Use of Map Keys:
+
+A dynamic use case is demonstrated where the map is queried based on the current time to determine whether the restaurant is open or closed.
+
+Example:
+
+```javascript
+const currentTime = 21;
+console.log(
+  rest.get(currentTime > rest.get("open") && currentTime < rest.get("close"))
+); // Output: 'We are open'
+```
+
+## 7. Deleting Elements from a Map:
+
+    Elements can be deleted from a map using the delete method, which takes the key as an argument.
+
+Example:
+
+```javascript
+rest.delete(2); // Deleting the second location
+```
+
+## 8. Map Methods and Properties:
+
+has Method: Checks if a map contains a certain key.
+size Property: Returns the number of entries in the map.
+clear Method: Removes all elements from the map.
+Examples:
+
+```javascript
+console.log(rest.has("categories")); // Output: true
+console.log(rest.size); // Output: 7
+rest.clear();
+```
+
+## 9. Using Objects and Arrays as Map Keys:
+
+Demonstration that objects and arrays can be used as keys in a map. However, it's highlighted that the actual object reference matters when retrieving values.
+
+Example:
+
+```javascript
+const arrayKey = [1, 2];
+rest.set(arrayKey, "Test");
+console.log(rest.get([1, 2])); // Output: undefined
+console.log(rest.get(arrayKey)); // Output: 'Test'
+```
+
+## 10. Advanced Example: Using DOM Elements as Map Keys:
+
+A more advanced example shows using a DOM element as a key, associating it with a value in the map.
+
+Example:
+
+```javascript
+const headingElement = document.querySelector("h1");
+rest.set(headingElement, "Heading");
+console.log(rest.get(headingElement)); // Output: 'Heading'
+```
+
+## 1. Creating a Map with alternate way:
+
+A new map is created for a quiz application. Instead of using the set method, an array of arrays is passed directly to the Map constructor. Each inner array contains a key-value pair.
+
+Example:
+
+```javascript
+const question = new Map([
+  ["question", "What is the best programming language in the world?"],
+  [1, "C"],
+  [2, "Java"],
+  [3, "JavaScript"],
+  ["correct", 3],
+  [true, "Correct 😀"],
+  [false, "Try again! ❌"],
+]);
+```
+
+## 2. Converting Object to Map:
+
+Demonstrates converting an object to a map using Object.entries. This shows an easy way to switch between object and map structures.
+
+Example:
+
+```javascript
+const openingHours = {
+  thu: { open: 12, close: 22 },
+  fri: { open: 11, close: 23 },
+  sat: { open: 0, close: 24 },
+};
+
+const hoursMap = new Map(Object.entries(openingHours));
+```
+
+## 3. Iterating Over a Map:
+
+The for...of loop is used to iterate over the quiz map. The destructuring assignment is used to separate the key and value.
+
+Example:
+
+```javascript
+for (const [key, value] of question) {
+  if (typeof key === "number") {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+```
+
+## 4. Implementing a Simple Quiz:
+
+    Uses a loop to ask the user for an answer and provides feedback based on whether the answer is correct or not. Boolean keys in the map help in determining success or failure.
+
+Example:
+
+```javascript
+const userAnswer = Number(prompt("Your answer:"));
+const correctAnswer = question.get("correct");
+
+console.log(
+  userAnswer === correctAnswer ? question.get(true) : question.get(false)
+);
+```
+
+## 5. Converting Map to Array:
+
+Shows how to convert a map back to an array using the spread operator.
+
+Example:
+
+```javascript
+const questionArray = [...question];
+console.log(questionArray);
+```
+
+# SUMMARY:
+
+This part of the tutorial provides an overview of JavaScript's built-in data structures (arrays, objects, sets, and maps) and discusses when to choose each based on different use cases.
+
+## 1. Sources of Data:
+
+Program Source Code: Static data within the program.
+User Interface: Data from user input or webpage content.
+External Sources (Web API): Data fetched from other web applications.
+
+## 2. Decision Factors for Data Structures:
+
+Simple List of Values: Use arrays or sets.
+Key-Value Pairs: Use objects or maps.
+
+## 3. JSON Data Format:
+
+Example:
+
+```javascript
+[
+  { title: "Pasta Carbonara", publisher: "John" },
+  { title: "Avocado Pizza", publisher: "Jane" },
+  { title: "Vegan Burger", publisher: "Bob" },
+];
+```
+
+Use Case: Data from Web API often comes in JSON format.
+Object Key-Value Pairs: Essential for describing values.
+
+## 4. Comparison of Data Structures:
+
+### Arrays vs. Sets:
+
+**Arrays:** For simple lists of ordered values with possible duplicates.
+**Sets:** For unique values or scenarios where performance is crucial (faster operations).
+
+## Objects vs. Maps:
+
+**Objects:** Traditional key-value data structure, often used for simple key-value stores.
+Suitable for describing values with keys.
+**Advantages:** Easy to write, access, and use functions as values.
+Good for JSON data and when functions are part of the values.
+**Maps:** Better performance, keys can be of any data type, easy to iterate and compute size.
+Suitable for simple key-value stores when keys are not strings.
+Powerful when non-string keys are needed.
+
+### When to Use Objects:
+
+Use when easy readability and access are important.
+For storing functions (methods) as values.
+Common for JSON data.
+
+### When to Use Maps:
+
+Use when performance is crucial.
+When keys can be of any data type.
+Powerful for advanced use cases involving non-string keys.
+
+## Conclusion:
+
+**Arrays:** Lists of ordered values.
+**Sets:** Collections of unique values or performance-intensive operations.
+**Objects:** Traditional key-value data structure, easy to use and suitable for most scenarios.
+**Maps:** High performance, flexible key-value data structure, suitable for non-string keys.
+
+## 5. Additional Notes:
+
+Mention of other data structures like WeakSets, WeakMaps, stacks, queues, linked lists, trees, and hash tables.
+Awareness of more advanced data structures but not necessary for beginners.
